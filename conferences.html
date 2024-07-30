@@ -9,41 +9,6 @@
     <meta name="author" content="Mohammad Deen Hayatu">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="/assets/css/style.css?v=fed9122a09d95fee20e89d0dc4d67d34d76cf53b">
-    <style>
-        .img-container {
-            position: relative;
-            max-width: 100%;
-            overflow: hidden;
-            background: #000;
-        }
-        .img-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .prevent-screenshot {
-            position: relative;
-        }
-        .prevent-screenshot::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.5); /* or any transparent color */
-            pointer-events: none; /* Allow interaction with underlying content */
-        }
-    </style>
-    <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', event => {
-            if (event.key === 'PrintScreen') {
-                navigator.clipboard.writeText('');
-                alert('Screenshots are disabled.');
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -57,7 +22,7 @@
                 </ul>
             </nav>
         </header>
-        <section>
+        <section>            
             <h2>Conferences Attended</h2>
             <ul>
                 <li>
