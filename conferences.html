@@ -9,6 +9,38 @@
     <meta name="author" content="Mohammad Deen Hayatu">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="/assets/css/style.css?v=fed9122a09d95fee20e89d0dc4d67d34d76cf53b">
+    <style>
+        .pdf-container {
+            position: relative;
+            padding-top: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+        }
+        .pdf-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        /* Prevent screenshot by covering content */
+        .prevent-screenshot {
+            position: relative;
+        }
+        .prevent-screenshot::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5); /* or any transparent color */
+            pointer-events: none; /* Allow interaction with underlying content */
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -24,18 +56,12 @@
         </header>
         <section>
             <h2>Conferences Attended</h2>
-            <ul>
-                <li>
-                    <p><strong>European Human Genetics Conference</strong> - Glassgow, 10-13 June 2023</p>
-                    <p>A conference that brings together key players in the field of human genetics around the wold.For this year, i submitted an abstractg and was selected to present a poster.</p>
-                    <p><a href="assets/pdfs/conference_poster1.pdf" target="_blank">Download Conference Poster</a></p>
-                </li>
-                <li>
-                    <p><strong>European Human Genetics Conference</strong> - Berlin, 1-4 June 2024e</p>
-                    <p>A conference that brings together key players in the field of human genetics around the wold.For this year, i submitted an abstractg and was selected to present a poster.</p>
-                    <p><a href="assets/pdfs/conference_poster2.pdf" target="_blank">Download Conference Poster</a></p>
-                </li>
-            </ul>
+            <div class="pdf-container prevent-screenshot">
+                <iframe src="assets/pdfs/ESHG_Glasgow_2023.pdf"></iframe>
+            </div>
+            <div class="pdf-container prevent-screenshot">
+                <iframe src="assets/pdfs/ESHG_Berlin_2024.pdf"></iframe>
+            </div>
         </section>
     </div>
 </body>
