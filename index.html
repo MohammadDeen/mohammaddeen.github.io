@@ -49,6 +49,56 @@
         .institution-logo:hover {
             transform: scale(1.1);
         }
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .profile-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+        .nav-mobile {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .nav-mobile {
+                display: block;
+            }
+            .nav-desktop {
+                display: none;
+            }
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #1e40af;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -62,13 +112,31 @@
                         
                     </div>
                 </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="#about" class="py-4 px-2 hover:text-blue-600">About</a>
-                    <a href="#research" class="py-4 px-2 hover:text-blue-600">Research</a>
-                    <a href="#publications" class="py-4 px-2 hover:text-blue-600">Publications</a>
-                    <a href="#skills" class="py-4 px-2 hover:text-blue-600">Skills</a>
-                    <a href="#contact" class="py-4 px-2 hover:text-blue-600">Contact</a>
+                <div class="hidden md:flex items-center space-x-6 nav-desktop">
+                    <a href="#about" class="py-4 px-2 hover:text-blue-600 transition-colors">About</a>
+                    <a href="#research" class="py-4 px-2 hover:text-blue-600 transition-colors">Research</a>
+                    <a href="#publications" class="py-4 px-2 hover:text-blue-600 transition-colors">Publications</a>
+                    <a href="#skills" class="py-4 px-2 hover:text-blue-600 transition-colors">Skills</a>
+                    <a href="#contact" class="py-4 px-2 hover:text-blue-600 transition-colors">Contact</a>
                 </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
+                <a href="#about" class="block px-3 py-2 hover:text-blue-600 mobile-menu-item">About</a>
+                <a href="#research" class="block px-3 py-2 hover:text-blue-600 mobile-menu-item">Research</a>
+                <a href="#publications" class="block px-3 py-2 hover:text-blue-600 mobile-menu-item">Publications</a>
+                <a href="#skills" class="block px-3 py-2 hover:text-blue-600 mobile-menu-item">Skills</a>
+                <a href="#contact" class="block px-3 py-2 hover:text-blue-600 mobile-menu-item">Contact</a>
             </div>
         </div>
     </nav>
@@ -80,6 +148,7 @@
                 <div>
                     <h1 class="text-4xl font-bold mb-4">Mohammad Deen Hayatu, MSc</h1>
                     <p class="text-xl mb-6">Inflammation / Immunology / Genetics</p>
+                    <p class="text-lg mb-6 opacity-90">Doctoral Candidate at University Hospital Erlangen • Biomedical Scientist • Bioinformatics Researcher</p>
                     <div class="flex space-x-4 mb-6">
                     <a href="https://www.uk-erlangen.de/en/contact/business-card/mohammad-deen-hayatu-11676/" class="institution-logo">
                             <img src="assets/images/UKE_FAU.png" alt="UKE FAU" class="w-12 h-12 rounded">
@@ -97,7 +166,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQFt0wtNtcEL2A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1723269598474?e=1736380800&v=beta&t=z6y1z0g_jRuyPofToEiMO1Vs7I4KtGvYaJldlFC_wTw">
+                    <img src="assets/images/profile.jpg" alt="Mohammad Deen Hayatu" class="w-48 h-48 rounded-full mx-auto border-4 border-white shadow-lg object-cover profile-image">
                 </div>
             </div>
         </div>
@@ -221,8 +290,71 @@
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <p>&copy; 2024 Mohammad Deen Hayatu. All rights reserved.</p>
+            <p>&copy; 2025 Mohammad Deen Hayatu. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuItems = document.querySelectorAll('.mobile-menu-item');
+            const backToTopButton = document.getElementById('backToTop');
+
+            // Mobile menu functionality
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking on a menu item
+            mobileMenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Back to top button functionality
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add fade-in animation to sections
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
